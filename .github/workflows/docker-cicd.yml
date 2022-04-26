@@ -18,27 +18,36 @@ jobs:
 
 #etape d'execution du workflow
     steps:
-    #checkout recupere le repo
+    #checkout check and retrieve the repo
     - uses: actions/checkout@v3
     
-    #le nom de l'etape est Build the Docker image
+    # --------------------------------- Docker part  -------------------------------------#
+    #name of the step is "Build the Docker image"
     - name: Build the Docker image
-    #la commande executer durant cette etape
+    # the line run during the step
       run: docker build . --file Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
       
-    #le nom de l'etape est Docker Login
+    #name of the step is "Docker Login"
     - name: Docker Login
-    #la commande executer durant cette etape
+    # the line run during the step
       run: docker login --username '${{secrets.DOCKER_LOGIN}}' --password '${{secrets.DOCKER_PASSWORD}}'
       
-    #le nom de l'etape est Tag the Docker image
+    #name of the step is "Tag the Docker image"
     - name: Tag the Docker image
-    #la commande executer durant cette etape
+    # the line run during the step
       run: docker tag '${{env.DOCKER_IMAGE_NAME}}':latest '${{secrets.DOCKER_LOGIN}}'/'${{env.DOCKER_IMAGE_NAME}}':latest
       
-     #le nom de l'etape est Push the Docker image
+     #name of the step is "Push the Docker image"
     - name: Push the Docker image
-    #la commande executer durant cette etape
+    # the line run during the step
       run: docker push '${{secrets.DOCKER_LOGIN}}'/'${{env.DOCKER_IMAGE_NAME}}':latest
+     
+      # --------------------------------- Azure part  -------------------------------------#
+     
+     #name of the step is "Azure login"
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
       
       
