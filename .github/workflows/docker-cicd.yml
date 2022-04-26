@@ -16,9 +16,29 @@ jobs:
 
     runs-on: ubuntu-latest
 
+#etape d'execution du workflow
     steps:
+    #checkout recupere le repo
     - uses: actions/checkout@v3
+    
+    #le nom de l'etape est Build the Docker image
     - name: Build the Docker image
+    #la commande executer durant cette etape
       run: docker build . --file Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
+      
+    #le nom de l'etape est Docker Login
+    - name: Docker Login
+    #la commande executer durant cette etape
+      run: docker login --username '${{secrets.DOCKER_LOGIN}}' --password '${{secrets.DOCKER_PASSWORD}}'
+      
+    #le nom de l'etape est Tag the Docker image
+    - name: Tag the Docker image
+    #la commande executer durant cette etape
+      run: docker tag '${{env.DOCKER_IMAGE_NAME}}':latest '${{secrets.DOCKER_LOGIN}}'/'${{env.DOCKER_IMAGE_NAME}}':latest
+      
+     #le nom de l'etape est Push the Docker image
+    - name: Push the Docker image
+    #la commande executer durant cette etape
+      run: docker push '${{secrets.DOCKER_LOGIN}}'/'${{env.DOCKER_IMAGE_NAME}}':latest
       
       
