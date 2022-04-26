@@ -1,0 +1,24 @@
+name: Docker Image Deployement to Azure web App for Container
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    
+env:
+  DOCKER_IMAGE_NAME: 'demoTestRepo'
+  
+    
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag '${{env.DOCKER_IMAGE_NAME}}':latest
+      
+      
