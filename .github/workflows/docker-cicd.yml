@@ -12,7 +12,7 @@ env:
     
 jobs:
 
-  build:
+  build_and_deploy_DockerHub:
 
     runs-on: ubuntu-latest
 
@@ -43,7 +43,7 @@ jobs:
       run: docker push '${{secrets.DOCKER_LOGIN}}'/'${{env.DOCKER_IMAGE_NAME}}':latest
      
       # --------------------------------- Azure part  -------------------------------------#
-     
+  
      #name of the step is "Azure login"
     - name: Azure login
       uses: azure/login@v1
