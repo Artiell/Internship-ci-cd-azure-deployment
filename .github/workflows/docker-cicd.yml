@@ -45,9 +45,9 @@ jobs:
       # --------------------------------- Azure part  -------------------------------------#
   
      #name of the step is "Azure login"
-    - name: Azure login
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    #- name: Azure login
+    #  uses: azure/login@v1
+    #  with:
+    #    creds: ${{ secrets.AZURE_CREDENTIALS }}
       
       
