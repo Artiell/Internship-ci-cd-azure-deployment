@@ -1,7 +1,0 @@
-streamlit
-transformers==4.18.0
-torch
-sentencepiece
-nltk
-langdetect
-newspaper3k
