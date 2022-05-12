@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{{ url_for('static', filename= 'css/styles.css') }}" rel="stylesheet" />
+
+    <title>{% block title %}NLP modele Presentation {% endblock %}</title>
+</head>
+<body id="page-top">
+    {% extends 'base.html' %}
+
+    {% block content %}
+
+        <!-- Services-->
+        <section class="page-section" id="services">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Services</h2>
+                    <h3 class="section-subheading text-muted">You can find here a short description of each modele accessible from this page.</h3>
+                </div>
+
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                           <img src="static/assets/img/Icone/ParagrapheT5.png" alt="icone Paragraphe">
+                        </span>
+                        <h4 class="my-3">Paraphrase T5</h4>
+                        <p class="text-muted">The Paragraph T5 model is a generating paraphrases model trained on the Google PAWS dataset. This modele will produce a paraphrase of the input text given. </p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <img src="static/assets/img/Icone/sentiment.png" alt="icone sentiment">
+                        </span>
+                        <h4 class="my-3">Deep Sentiment</h4>
+                        <p class="text-muted">The Deep Sentiment is a model with an LSTM (Long Short Term Memory) neural architecture. This model will give in output a number between 0 and 1, where 1 is a positive sentence and 0 a negative sentence.</p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                           <img src="static/assets/img/Icone/keyword.png">
+                        </span>
+                        <h4 class="my-3">Keywords&Keyphrases</h4>
+                        <p class="text-muted">The Keyword & Keyphrases model is based on the KeyBert library. It leverages transformers and cosine similarity to efficiently extract keywords and keyphrases that better represent a given document. To use it you just have to put text on the input and submit the text. the model will give you keywords and keyphrases from the input document.</p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <img src="static/assets/img/Icone/SummarizeAbstractif.png">
+                        </span>
+                        <h4 class="my-3">Summarize Abstract</h4>
+                        <p class="text-muted">The goal of the Summarize Abstract model is to make summary based on the input text given. It's an Abstractif model. The model will first analyse the input text then guess words to create a new summary with same mains topics as the original text.</p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <img src="static/assets/img/Icone/SummarizeExtractif.png">
+                        </span>
+                        <h4 class="my-3">Summarize Extract</h4>
+                        <p class="text-muted">As the Summarize Abstract model, the goal of the Summarize Extract model is to create summary from the given input text. But it works differently. This model will extract keywords and keyphrases of the input text, then fill the summary with some sentences.</p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <img src="static/assets/img/Icone/translation.png">
+                        </span>
+                        <h4 class="my-3">Translation T5</h4>
+                        <p class="text-muted">The Translation T5 model is a Translation model. It takes English text only in input and can translate it in French, in Romanian and German. This model was developed at the origin by google</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    {% endblock %}
+
+</body>
+</html>

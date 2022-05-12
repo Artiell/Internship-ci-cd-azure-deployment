@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Paraphrase {% endblock %}</title>
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    <div class="form-group">
+            <select name="type" class="form-control select-group select-type">
+                {% for t in data %}
+                    <option value="{{ t.type }}">{{ t.type }}</option>
+                {% endfor %}
+            </select>
+            <textarea name="content" placeholder="Input text here"
+                      class="form-control text-control">{{ request.form['content'] }}</textarea>
+    </div>
+    <div class="btn-control">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+    <!--See the result after submit-->
+    {% if request.method == 'POST' %}
+        <h2>Output :</h2>
+        <p class="result">{{ result }}</p>
+    {% endif %}
+
+
+    <p class="result">
+    <!--See the result after submit-->
+    {% if request.method == 'POST' %}
+        This text is written in : {{ lang }}
+    {% endif %}
+    </p>
+
+{% endblock %}
+
+
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Extract Summary Text {% endblock %}</title>
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    <div class="form-group">
+        <p>Max length of a sentence :</p>
+        <input type="range" min="100" max="256" value="100" class="slider" id="myRange" name="maxLength" oninput="this.nextElementSibling.value = this.value">
+        <output>100</output>
+        <p>Number of sentence per summary :</p>
+            <input type="range" min="1" max="6" value="1" class="slider" id="myRange" name="n_sentence" oninput="this.nextElementSibling.value = this.value">
+        <output>1</output>
+        <p>Number of summary :</p>
+        <input type="range" min="1" max="6" value="1" class="slider" id="myRange" name="n_topic" oninput="this.nextElementSibling.value = this.value">
+        <output>1</output>
+
+        <textarea name="content" placeholder="Input text here"
+                      class="form-control text-control">{{ request.form['content'] }}</textarea>
+    </div>
+    <div class="btn-control">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+    <p>
+    <!--See the result after submit after from-->
+    {% if request.method == 'POST' %}
+        {% for res in result %}
+            <h2>Summary :</h2>
+            <p class="result">
+            {% for sentence in res %}
+                {{ sentence }}
+            {% endfor %}
+            </p>
+        {% endfor %}
+        </p>
+        <div class="img-group">
+            <img class="img-item" src="{{ url_plot1 }}" alt="plot1">
+            <img class="img-item" src="{{ url_plot2 }}" alt="plot2">
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Abstract Summary Text {% endblock %}</title>
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="post">
+    <div class="form-group">
+            <textarea name="content" placeholder="Input text here"
+                      class="form-control text-control">{{ request.form['content'] }}</textarea>
+    </div>
+    <div class="btn-control">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+    <!--See the result after submit after from-->
+    {% if request.method == 'POST' %}
+        <h2>Summary :</h2>
+        <p class="result">
+        {{ result }}
+        </p>
+    {% endif %}
+
+{% endblock %}
+
+
+
+</body>
+</html>
