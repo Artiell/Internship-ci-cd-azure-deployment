@@ -1,4 +1,4 @@
-# Internship-ci-cd-azure-deployment
+# Internship-ci/cd-azure-deployment
 
 This repo contain a python web application made with the streamlit library.
 The goal of this repo is to use the github actions feature.
