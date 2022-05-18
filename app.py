@@ -7,6 +7,8 @@ import translate as tr
 import paraphrase as pa
 import sentiment as sent
 
+import os
+
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = '8f42a73054b1749f8f58848be5e6502c'
 
