@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, Response
+
+import time
 
 import summaryEx as se
 import summaryAb as sa
@@ -66,7 +68,7 @@ def keywords():
 
 @app.route('/translate', methods=['POST', 'GET'])
 def translate():
-    data = [{'langue': 'French'}, {'langue': 'English'}, {'langue': 'German'}, {'langue': 'Romanian'}]
+    data = [{'langue': 'French'}, {'langue': 'German'}, {'langue': 'Romanian'}]
 
     if request.method == 'POST':
         text = request.form['content']
@@ -75,8 +77,6 @@ def translate():
 
         if not text:
             flash('Please enter text')
-        elif langueEntry == langueExit:
-            flash('Please select different languages')
         else:
             res = tr.main(text, langueEntry, langueExit)
             return render_template('translate.html', data=data, result=res)
@@ -93,8 +93,11 @@ def paraphrase():
         text = request.form['content']
         type = request.form['type']
 
-        if not text:
-            flash('Please enter text')
+        #check if type is URL or Text
+        if type == 'URL' and not text.startswith('http'):
+            flash('Please enter a valid URL')
+        elif not text:
+            flash('Please enter text or URL')
         else:
             res, lang = pa.main(text, type)
             return render_template('paraphrase.html', result=res, lang=lang, data=data)
@@ -115,6 +118,7 @@ def sentiment():
 
     return render_template('sentiment.html')
 
+
 if __name__ == '__main__':
-    port= int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 5000))
     app.run(debug=True, host='0.0.0.0', port=port)

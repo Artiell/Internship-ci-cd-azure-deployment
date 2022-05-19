@@ -5,6 +5,7 @@ import nltk
 import time
 import math
 import langdetect as ld
+from tqdm import tqdm
 
 # import functions
 from newspaper import Article
@@ -51,6 +52,6 @@ def main(text, type):
 
         return output
 
-    output = " ".join([my_paraphrase(sent) for sent in sent_tokenize(resText)])
+    output = " ".join([my_paraphrase(sent) for sent in tqdm(sent_tokenize(resText))])
 
     return output, ld.detect(resText)
