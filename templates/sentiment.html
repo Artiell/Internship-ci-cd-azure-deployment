@@ -12,18 +12,27 @@
 <form method="post">
     <div class="form-group">
             <textarea name="content" placeholder="Input text here"
-                      class="form-control text-control">{{ request.form['content'] }}</textarea>
+                      class="form-control text-control">{% if request.form['content'] %}{{ request.form['content'] }}{% else %}I am happy to serve as a test sentence.{% endif %}</textarea>
     </div>
     <div class="btn-control">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
 
-    <!--See the result after submit after from-->
-    {% if request.method == 'POST' %}
-        <h2>Output :</h2>
-        <p class="result"> On a scale from 0 to 1, the result is : {{ result }}</p>
-    {% endif %}
+    <!--See the result after submit-->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error" >
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+        {% elif request.method == 'POST' %}
+            <h2>Output :</h2>
+            <p class="result"> On a scale from 0 to 1, the result is : {{ result }}</p>
+        {% endif %}
+    {% endwith %}
 
 {% endblock %}
 

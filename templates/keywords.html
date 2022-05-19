@@ -13,21 +13,36 @@
 <form method="post">
     <div class="form-group">
             <textarea name="content" placeholder="Input text here"
-                      class="form-control text-control">{{ request.form['content'] }}</textarea>
+                      class="form-control text-control" >{% if request.form['content'] %}{{ request.form['content'] }}{% else %}
+The earliest archaeological finds within the city limits of Dijon date to the Neolithic period. Dijon later became a Roman settlement called Divio, which may mean sacred fountain, located on the road from Lyon to Paris. Saint Benignus, the city's apocryphal patron saint, is said to have introduced Christianity to the area before being martyred.
+This province was home to the Dukes of Burgundy from the early 11th until the late 15th century, and Dijon was a place of tremendous wealth and power and one of the great European centres of art, learning, and science. The Duchy of Burgundy was key in the transformation of medieval times toward early modern Europe. The Palace of the Dukes of Burgundy now houses the city hall and a museum of art.
+In 1513, Swiss and Imperial armies invaded Burgundy and besieged Dijon, which was defended by the governor of the province, Louis II de la Trémoille. The siege was extremely violent, but the town succeeded in resisting the invaders. After long negotiations, Louis II de la Trémoille managed to persuade the Swiss and the Imperial armies to withdraw their troops and also to return three hostages who were being held in Switzerland. During the siege, the population called on the Virgin Mary for help and saw the town's successful resistance and the subsequent withdrawal of the invaders as a miracle. For those reasons, in the years following the siege the inhabitants of Dijon began to venerate Notre-Dame de Bon-Espoir (Our Lady of Good Hope). Although a few areas of the town were destroyed, there are nearly no signs of the siege of 1513 visible today. However, Dijon's museum of fine arts has a large tapestry depicting this episode in the town's history: it shows the town before all subsequent destruction (particularly that which occurred during the French Revolution) and is an example of 16th-century art.
+Dijon was also occupied by anti-Napoleonic coalitions in 1814, by the Prussian army in 1870–71, and by Nazi Germany beginning in June 1940, during WWII, when it was bombed by US Air Force B-17 Flying Fortresses,[7] before the liberation of Dijon by the French Army and the French Resistance, 11 September 1944.{% endif %}</textarea>
+
     </div>
     <div class="btn-control">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
 
-    {% if request.method == 'POST' %}
-        <h2>Output :</h2>
-        {% for term in result %}
-            <p class="result">
-            {{ term[0] }} - {{ term[1] }}
-            </p>
-        {% endfor %}
-    {% endif %}
+    {% with messages = get_flashed_messages() %}
+       {% if messages %}
+          {% for message in messages %}
+              <div class="error" >
+                  {{ message }}
+              </div>
+          {% endfor %}
+
+       {% elif request.method == 'POST' %}
+           <h2>Output :</h2>
+            {% for term in result %}
+                <p class="result">
+                {{ term[0] }} - {{ term[1] }}
+                </p>
+            {% endfor %}
+        {% endif %}
+
+    {% endwith %}
 
 {% endblock %}
 

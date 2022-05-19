@@ -11,26 +11,25 @@
 
 <form method="post">
     <div class="form-group">
+        <textarea name="content" placeholder="Input text here"
+                  class="form-control text-control">{% if request.form['content'] %}{{ request.form['content'] }}{% else %}I am happy to serve as a test sentence{% endif %}</textarea>
 
-            <textarea name="content" placeholder="Input text here"
-                      class="form-control text-control">{{ request.form['content'] }}</textarea>
+        <div class="select-group">
 
-            <div class="select-group">
+            <select name="langueEntry" class="form-control select-item">
+                    <option value="English">English</option>
+            </select>
 
-                <select name="langueEntry" class="form-control select-item">
-                        <option value="English">English</option>
-                </select>
+        <img class="img-trad" src="static/assets/img/arrrow.png" alt="arrrow">
 
-            <img class="img-trad" src="static/assets/img/arrrow.png" alt="arrrow">
+            <select name="langueExit" class="form-control lang-item">
 
-                <select name="langueExit" class="form-control lang-item">
+                {% for l in data %}
+                    <option value="{{ l.langue }}">{{ l.langue }}</option>
+                {% endfor %}
+            </select>
 
-                    {% for l in data %}
-                        <option value="{{ l.langue }}">{{ l.langue }}</option>
-                    {% endfor %}
-                </select>
-
-            </div>
+        </div>
     </div>
     <div class="btn-control">
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -39,12 +38,21 @@
 
 
     <!--See the result after submit after from-->
-    {% if request.method == 'POST' %}
-        <h2>Output :</h2>
-        <p class="result">
-        {{ result }}
-        </p>
-    {% endif %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="error" >
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+        {% elif request.method == 'POST' %}
+            <h2>Output :</h2>
+            <p class="result">
+                {{ result }}
+            </p>
+        {% endif %}
+    {% endwith %}
 
 {% endblock %}
 
