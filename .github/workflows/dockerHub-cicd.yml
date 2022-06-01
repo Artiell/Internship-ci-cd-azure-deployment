@@ -8,12 +8,17 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
+
+env:
+  DOCKER_IMAGE_NAME: docker-container
 
 jobs:
+
   push_to_registry:
+  
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -24,9 +29,8 @@ jobs:
           username: ${{ secrets.DOCKER_LOGIN }}
           password: ${{ secrets.DOCKER_PASSWORD }}
         
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: artiell/DockerContainer
+      - name: Build docker image
+        run: docker build -t secrets.TEMPREGISTRE/${{env.DOCKER_IMAGE_NAME}}:latest .
+        
+      - name: Push docker image
+        run: docker push secrets.TEMPREGISTRE/${{env.DOCKER_IMAGE_NAME}}:latest
