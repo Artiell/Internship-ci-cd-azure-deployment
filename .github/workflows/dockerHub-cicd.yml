@@ -30,7 +30,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         
       - name: Build docker image
-        run: docker build -t ${{env.DOCKER_IMAGE_NAME}}:latest .
+        run: docker build -t ${{ secrets.DOCKER_LOGIN }}/${{env.DOCKER_IMAGE_NAME}}:latest .
         
       - name: Push docker image
-        run: docker push ${{env.DOCKER_IMAGE_NAME}}:latest
+        run: docker push ${{ secrets.DOCKER_LOGIN }}/${{env.DOCKER_IMAGE_NAME}}:latest
